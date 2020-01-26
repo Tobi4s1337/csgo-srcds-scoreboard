@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Tobi4s1337/csgo-srcds-scoreboard/issues"
   },
-  "homepage": "https://github.com/Tobi4s1337/csgo-srcds-scoreboard#readme"
+  "homepage": "https://github.com/Tobi4s1337/csgo-srcds-scoreboard#readme",
+  "dependencies": {
+    "colyseus": "^0.11.29",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
 }
