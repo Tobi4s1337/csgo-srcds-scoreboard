@@ -1,0 +1,19 @@
+{
+  "name": "csgo-srcds-scoreboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tobi4s1337/csgo-srcds-scoreboard.git"
+  },
+  "author": "Tobias Klaus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tobi4s1337/csgo-srcds-scoreboard/issues"
+  },
+  "homepage": "https://github.com/Tobi4s1337/csgo-srcds-scoreboard#readme"
+}
