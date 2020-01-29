@@ -15,7 +15,6 @@ const gameServer = new colyseus.Server({
     server: server,
 });
 
-// register your room handlers
 gameServer.define('scoreBoard_room', ScoreBoardRoom);
 
 gameServer.listen(port);

@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/Tobi4s1337/csgo-srcds-scoreboard#readme",
   "dependencies": {
+    "better-srcds-log-parser": "^1.0.2",
     "colyseus": "^0.11.29",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "srcds-log-receiver": "^1.0.0"
   }
 }
