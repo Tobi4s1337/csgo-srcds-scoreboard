@@ -31,18 +31,21 @@ const SrcdsLogParser = require("better-srcds-log-parser").SrcdsLogParser;
 const parser = new SrcdsLogParser();
 const receiver = new logReceiver.LogReceiver();
 
-receiver.on("data", function (data) {
-    if (data.isValid) {
-        let event = parser.parseLine(data.message)
-        console.log(event.Type);
-    }
-});
-
-receiver.on("invalid", function (invalidMessage) {
-    console.log("Got some completely unparseable garbage: " + invalidMessage);
-})
-
 function updateState(state) {
+    receiver.on("data", function (data) {
+        console.log("ALARM")
+        if (data.isValid) {
+            let event = parser.parseLine(data.message)
+            console.log(event.Type);
+            if (event.Type === "Connection") {
+                console.log(event);
+            }
+        }
+    });
+
+    receiver.on("invalid", function (invalidMessage) {
+        console.log("Got some completely unparseable garbage: " + invalidMessage);
+    })
     console.log(state);
     state.scoreboard = {
         hahahahaha: "adada"

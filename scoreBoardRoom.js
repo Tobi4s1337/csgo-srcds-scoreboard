@@ -1,22 +1,34 @@
 const colyseus = require('colyseus');
 const srcdsHandler = require('./srcdsHandler');
 
-exports.ScoreBoardRoom = class extends colyseus.Room {
+let ScoreboardRoom = class ScoreboardRoom extends colyseus.Room {
+
     onCreate(options) {
-        this.setState({ scoreboard: {} })
+        this.setState({
+            scoreboard: {}
+        });
         srcdsHandler(this.state);
     }
 
-    onJoin(client, options) {
+
+    onJoin(client) {
+        this.broadcast(`${client.sessionId} joined.`);
     }
 
-    onMessage(client, message) {
+    onLeave(client) {
+        this.broadcast(`${client.sessionId} left.`);
+        console.log('User left');
     }
 
-    onLeave(client, consented) {
+    onMessage(client, data) {
+        console.log('BasicRoom received message from', client.sessionId, ':', data);
     }
 
     onDispose() {
+        //	console.log('Dispose BasicRoom');
     }
+};
 
-}
+
+module.exports = ScoreboardRoom;
+
