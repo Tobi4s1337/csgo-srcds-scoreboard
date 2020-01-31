@@ -11,14 +11,38 @@
 </head>
 
 <body>
-    <h1>Hello World</h1>
+    <div id="app"></div>
     <script>
         var host = (window.document.location.host || "localhost").replace(/:.*/, '');
         var client = new Colyseus.Client('ws://' + host + ':2567');
-        var room;
-        client.joinOrCreate('scoreBoard_room', {}).then((r) => {
-            room = r
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                scoreboard: {}
+            },
+            methods: {
+            }
         });
+
+        client.joinOrCreate("scoreBoard_room").then(room => {
+            console.log("joined");
+            room.onStateChange.once(function (state) {
+                console.log("initial room state:", state);
+            });
+
+            // new room state
+            room.onStateChange(function (state) {
+                // this signal is triggered on each patch
+                console.log(state);
+            });
+
+            // listen to patches coming from the server
+            room.onMessage(function (message) {
+                console.log(message)
+            });
+        })
+
     </script>
 </body>
 

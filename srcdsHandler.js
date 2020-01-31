@@ -46,10 +46,6 @@ function updateState(state) {
     receiver.on("invalid", function (invalidMessage) {
         console.log("Got some completely unparseable garbage: " + invalidMessage);
     })
-    console.log(state);
-    state.scoreboard = {
-        hahahahaha: "adada"
-    }
 }
 
 module.exports = updateState;
