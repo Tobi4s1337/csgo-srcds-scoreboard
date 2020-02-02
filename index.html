@@ -8,10 +8,116 @@
     <title>SRCDS Scoreboard</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="/colyseus.js"></script>
+    <style>
+        html {
+            background: #000428;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #004e92, #000428);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #004e92, #000428);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            margin-top: 120px;
+            color: white;
+            font-family: Montserrat;
+            font-size: 42px;
+        }
+
+        #app {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            max-width: 636px;
+            height: 30em;
+            margin-top: -15em;
+            /*set to a negative number 1/2 of your height*/
+            margin-left: -317px;
+            /*set to a negative number 1/2 of your width*/
+        }
+
+        .scoreboard {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            padding: 10px;
+        }
+
+        .timer,
+        .map {
+            width: 20%;
+            height: 100%;
+            display: inline-block;
+        }
+
+        .score {
+            width: 60%;
+            background-color: white;
+            height: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .match-info {
+            width: 100%;
+            height: 30px;
+            background-color: red;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app"></div>
+    <h1>Scoreboard</h1>
+    <div id="app">
+        <div class="scoreboard">
+            <div class="match-info">
+                <span class="map">Map: de_overpass</span>
+                <span class="score">
+                    <span class="ct-score">{{ scoreboard.ctScore}}</span>:
+                    <span class="t-score">{{ scoreboard.tScore}}</span>
+                </span>
+                <span class="timer"></span>
+            </div>
+            <table class="stats ct-stats">
+                <tr>
+                    <th>Counter Terrorists</th>
+                    <th>HP</th>
+                    <th>K</th>
+                    <th>A</th>
+                    <th>D</th>
+                </tr>
+                <tr v-for="player in scoreboard.players" v-if="player.team == 0">
+                    <td>{{ player.player.Name }}</td>
+                    <td>{{ player.hp }}</td>
+                    <td>{{ player.kills }}</td>
+                    <td>{{ player.assists }}</td>
+                    <td>{{ player.deaths }}</td>
+                </tr>
+            </table>
+            <div class=" round-history">
+            </div>
+            <table class="stats t-stats">
+                <tr>
+                    <th>Terrorists</th>
+                    <th>HP</th>
+                    <th>K</th>
+                    <th>A</th>
+                    <th>D</th>
+                </tr>
+                <tr v-for="player in scoreboard.players" v-if="player.team == 1">
+                    <td>{{ player.player.Name }}</td>
+                    <td>{{ player.hp }}</td>
+                    <td>{{ player.kills }}</td>
+                    <td>{{ player.assists }}</td>
+                    <td>{{ player.deaths }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <script>
         var host = (window.document.location.host || "localhost").replace(/:.*/, '');
         var client = new Colyseus.Client('ws://' + host + ':2567');
@@ -35,6 +141,7 @@
             room.onStateChange(function (state) {
                 // this signal is triggered on each patch
                 console.log(state);
+                app.scoreboard = state.scoreboard;
             });
 
             // listen to patches coming from the server

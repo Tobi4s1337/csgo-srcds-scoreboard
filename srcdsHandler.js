@@ -108,8 +108,9 @@ function updateState(state) {
             } else if (event.Type === "PlayerTriggered") {
                 //console.log("Player triggered event")
                 if (event.EventType == 9) {
+                    removeDisconnectedPlayers();
                     resetScore();
-                    removeDisconnectedPlayers()
+                    resetHP();
                 } else if (event.EventType == 8) {
                     //console.log("Round start")
                     //console.log(data.message)
