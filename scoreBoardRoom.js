@@ -1,11 +1,18 @@
 const colyseus = require('colyseus');
 const srcdsHandler = require('./srcdsHandler');
 
+
 let ScoreboardRoom = class ScoreboardRoom extends colyseus.Room {
 
     onCreate(options) {
         this.setState({
-            scoreboard: {}
+            scoreboard: {
+                players: [],
+                roundHistory: [],
+                ctScore: 0,
+                tScore: 0,
+                log: []
+            }
         });
         srcdsHandler(this.state);
     }
