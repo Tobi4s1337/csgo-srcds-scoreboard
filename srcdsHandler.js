@@ -1,31 +1,3 @@
-/*
-State:
-Score
-Round
-Past rounds (defuste / eliminated / time / bomb)
-Map
-Bomb planted
-Time left
-Player:
-- Name
-- connected
-- alive
-- kills
-- assists
-- deaths
-- team
-
-Events:
-- match started (need to reset stats)
-- round started
-- scored
-- bomb planted
-- bomb defused
-- connect
-- disconnect
-- kill / killed
-*/
-
 const logReceiver = require("srcds-log-receiver");
 const SrcdsLogParser = require("better-srcds-log-parser").SrcdsLogParser;
 const parser = new SrcdsLogParser();
